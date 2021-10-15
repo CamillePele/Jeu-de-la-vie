@@ -35,7 +35,7 @@ public class Game
     public Game(int nbCells, int cellSize)
     {
         n = nbCells;
-        grid = new Grid(nbCells, aliveCellsCoord);
+        grid = new Grid(nbCells, aliveCellsCoord, true, 30f);
         this.cellSize = cellSize;
     }
 

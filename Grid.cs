@@ -7,13 +7,27 @@ public class Grid
     private int _n { get; set; } //Le nombre de cellules
     public Cell[,] tabCells;
 
-    public Grid(int nbCells, List<Coords> aliveCellsCoords)
+    private Random random = new Random();
+
+    public Grid(int nbCells, List<Coords> aliveCellsCoords, bool random, float chance)
     {
         _n = nbCells;
-
-        //Console.WriteLine(string.Join(" ", aliveCellsCoords.AsEnumerable().Select(x => x.ToString())));
-        
         tabCells = new Cell[nbCells, nbCells];
+
+
+        if (random)
+        {
+            for (int y = 0; y < nbCells; y++)
+            {
+                for (int x = 0; x < nbCells; x++)
+                {
+                    double rng = this.random.NextDouble();
+                    tabCells[y, x] = new Cell(rng <= chance/100);
+                }
+            }
+            return;
+        }
+        
         
         for (int y = 0; y < nbCells; y++)
         {
@@ -80,7 +94,7 @@ public class Grid
 
     public void UpdateGrid()
     {
-        DisplayGrid();
+        //DisplayGrid();
         for (int y = 0; y < _n; y++)
         {
             for (int x = 0; x < _n; x++)
